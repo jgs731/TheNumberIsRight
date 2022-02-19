@@ -13,6 +13,8 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
 
     internal class Program
     {
+        private const string SO_CLOSE = "You\'re so close!. But, still wrong.";
+
         static void Main(string[] args)
         {
             RandomNum rNum = new RandomNum();
@@ -38,16 +40,31 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                     {
                         if (playerGuess > randomGeneratedNumber)
                         {
-                            Console.WriteLine("Guess is too high. Try again.");
+                            if ((randomGeneratedNumber - playerGuess) < -5)
+                            {
+                                Console.WriteLine(SO_CLOSE);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Guess is too high. Try again.");
+                            }
                         }
                         else if (playerGuess < randomGeneratedNumber)
                         {
-                            Console.WriteLine("Guess is too low. Try again");
+                            if ((randomGeneratedNumber - playerGuess) < 5)
+                            {
+                                Console.WriteLine(SO_CLOSE);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Guess is too low. Try again.");
+                            }
                         }
                     }
                 }
             }
-            Console.WriteLine("Thanks for playing!");
+            Console.WriteLine("Thanks for playing! Let's go again...");
+            correctAnswer = false;
         }
     }
 }
