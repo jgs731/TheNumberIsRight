@@ -22,11 +22,11 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
             Console.WriteLine("Welcome to \'The Number is Right\' game!");
             Console.WriteLine("------------------------------------");
             Thread.Sleep(1000);
+            int randomGeneratedNumber = rNum.generateNumber();
 
             while (correctAnswer == false)
             {
                 Console.Write("Guess todays number (between 1-100): ");
-                int randomGeneratedNumber = rNum.generateNumber();
                 playerGuess = Convert.ToInt32(Console.ReadLine());
                 {
                     if (playerGuess == randomGeneratedNumber)
@@ -37,9 +37,13 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                     else
                     {
                         if (playerGuess > randomGeneratedNumber)
+                        {
                             Console.WriteLine("Guess is too high. Try again.");
+                        }
                         else if (playerGuess < randomGeneratedNumber)
+                        {
                             Console.WriteLine("Guess is too low. Try again");
+                        }
                     }
                 }
             }
