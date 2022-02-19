@@ -34,37 +34,42 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                     if (playerGuess == randomGeneratedNumber)
                     {
                         Console.WriteLine("Correct answer!");
-                        correctAnswer = true;
+                        Thread.Sleep(1000);
+                        Console.WriteLine("Do you want to play again? (Enter Y/N) ");
+                        string response = Console.ReadLine();
+                        if (response == "N")
+                        {
+                            Console.WriteLine("Gracias para jugando, adios!");
+                            correctAnswer = true;
+                        }
                     }
                     else
                     {
                         if (playerGuess > randomGeneratedNumber)
                         {
-                            if ((randomGeneratedNumber - playerGuess) < -5)
+                            if ((playerGuess - randomGeneratedNumber) > 5)
                             {
-                                Console.WriteLine(SO_CLOSE);
+                                Console.WriteLine("Guess is too high. Try again.");
                             }
                             else
                             {
-                                Console.WriteLine("Guess is too high. Try again.");
+                                Console.WriteLine(SO_CLOSE);
                             }
                         }
                         else if (playerGuess < randomGeneratedNumber)
                         {
-                            if ((randomGeneratedNumber - playerGuess) < 5)
+                            if ((playerGuess - randomGeneratedNumber) < -5)
                             {
-                                Console.WriteLine(SO_CLOSE);
+                                Console.WriteLine("Guess is too low. Try again."); 
                             }
                             else
                             {
-                                Console.WriteLine("Guess is too low. Try again.");
+                                Console.WriteLine(SO_CLOSE);
                             }
                         }
                     }
                 }
             }
-            Console.WriteLine("Thanks for playing! Let's go again...");
-            correctAnswer = false;
         }
     }
 }
