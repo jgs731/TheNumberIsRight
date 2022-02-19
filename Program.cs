@@ -36,7 +36,10 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                     }
                     else
                     {
-                        Console.WriteLine("Incorrect answer. Please try again.");
+                        if (playerGuess > randomGeneratedNumber)
+                            Console.WriteLine("Guess is too high. Try again.");
+                        else if (playerGuess < randomGeneratedNumber)
+                            Console.WriteLine("Guess is too low. Try again");
                     }
                 }
             }
