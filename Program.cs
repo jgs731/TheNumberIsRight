@@ -2,17 +2,21 @@
 
 namespace TheNumberIsRight // Note: actual namespace depends on the project name.
 {
-    internal class Program
+    class RandomNum
     {
-        public int GenerateNumber()
+        public int generateNumber()
         {
             Random random = new Random();
-            return random.Next(1,100);
+            return random.Next(1, 100);
         }
+    }
 
+    internal class Program
+    {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            RandomNum rNum = new RandomNum();
+            Console.WriteLine(rNum.generateNumber());
         }
     }
 }
