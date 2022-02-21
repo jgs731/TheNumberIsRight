@@ -12,7 +12,7 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
         private const string INCORRECT = "Incorrect guess - you have lost a life";
         private const string THANKS_FOR_PLAYING_SPANISH = "Gracias para jugando, adios!";
         private const string SO_CLOSE = "You\'re so close!. But, still wrong.";
-        private const string GAME_OVER = "Game over, no lies remaining - the correct answer was: ";
+        private const string GAME_OVER = "Game over, no lives remaining - the correct answer was: ";
         private const string PLAY_AGAIN = "Do you want to play again? (Enter Y/N)";
 
         private static int generateNumber(Random random)
@@ -29,10 +29,10 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
             Console.WriteLine(WELCOME_MESSAGE);
             Console.WriteLine(LINE_SEPARATOR);
             Thread.Sleep(1000);
-            int randomGeneratedNumber = generateNumber(rNum);
 
             while (correctAnswer == false)
             {
+                int randomGeneratedNumber = generateNumber(rNum);
                 Console.Write(GUESS_TODAYS_NUMBER);
                 playerGuess = Convert.ToInt32(Console.ReadLine());
                 {
