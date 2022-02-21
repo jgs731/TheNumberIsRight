@@ -1,10 +1,18 @@
 ﻿using System;
+using System.IO;
 
 namespace TheNumberIsRight // Note: actual namespace depends on the project name.
 {
     internal class Program
     {
+        private const string WELCOME_MESSAGE = "Welcome to \'The Number is Right\' game!";
+        private const string LINE_SEPARATOR = "------------------------------------";
+        private const string GUESS_TODAYS_NUMBER = "Guess todays number (between 1-100): ";
+        private const string CORRECT = "Well done, correct answer!";
+        private const string INCORRECT = "Incorrect guess - you have lost a life";
+        private const string THANKS_FOR_PLAYING_SPANISH = "Gracias para jugando, adios!";
         private const string SO_CLOSE = "You\'re so close!. But, still wrong.";
+        private const string GAME_OVER = "Game over, no lies remaining - the correct answer was: ";
         private const string PLAY_AGAIN = "Do you want to play again? (Enter Y/N)";
 
         private static int generateNumber(Random random)
@@ -15,28 +23,28 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
         {
             Random rNum = new Random();
             int playerGuess;
-            bool correctAnswer = false;
             int lives = 3;
+            bool correctAnswer = false;
             
-            Console.WriteLine("Welcome to \'The Number is Right\' game!");
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine(WELCOME_MESSAGE);
+            Console.WriteLine(LINE_SEPARATOR);
             Thread.Sleep(1000);
             int randomGeneratedNumber = generateNumber(rNum);
 
-            while (correctAnswer == false && lives > 0)
+            while (correctAnswer == false)
             {
-                Console.Write("Guess todays number (between 1-100): ");
+                Console.Write(GUESS_TODAYS_NUMBER);
                 playerGuess = Convert.ToInt32(Console.ReadLine());
                 {
                     if (playerGuess == randomGeneratedNumber)
                     {
-                        Console.WriteLine("Correct answer!");
+                        Console.WriteLine(CORRECT);
                         Thread.Sleep(1000);
                         Console.WriteLine(PLAY_AGAIN);
                         string response = Console.ReadLine();
                         if (response == "N")
                         {
-                            Console.WriteLine("Gracias para jugando, adios!");
+                            Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
                             correctAnswer = true;
                         }
                     }
@@ -45,34 +53,19 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                         lives--;
                         if (lives == 0)
                         {
-                            Console.WriteLine("Game over! Correct answer was {0}. ", randomGeneratedNumber);
+                            Console.WriteLine(GAME_OVER + $"{randomGeneratedNumber}");
                             Thread.Sleep(1500);
-                            Console.WriteLine("Gracias para jugando, adios!");
+                            Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
                         }
                         else
                         {
-                            Console.WriteLine("Incorrect guess - you have {0} guesses left", lives);
-                            if (playerGuess > randomGeneratedNumber)
+                            if (playerGuess - randomGeneratedNumber < Math.Abs(5.0))
                             {
-                                if ((playerGuess - randomGeneratedNumber) > 5)
-                                {
-                                    Console.WriteLine("Guess is too high. Try again.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine(SO_CLOSE);
-                                }
+                                Console.WriteLine(SO_CLOSE);
                             }
-                            else if (playerGuess < randomGeneratedNumber)
+                            else
                             {
-                                if ((playerGuess - randomGeneratedNumber) < -5)
-                                {
-                                    Console.WriteLine("Guess is too low. Try again."); 
-                                }
-                                else
-                                {
-                                    Console.WriteLine(SO_CLOSE);
-                                }
+                                Console.WriteLine(INCORRECT);
                             }
                         }
                     }
