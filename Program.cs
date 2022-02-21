@@ -2,23 +2,18 @@
 
 namespace TheNumberIsRight // Note: actual namespace depends on the project name.
 {
-    class RandomNum
-    {
-        public int generateNumber()
-        {
-            Random random = new Random();
-            return random.Next(1, 100);
-        }
-    }
-
     internal class Program
     {
         private const string SO_CLOSE = "You\'re so close!. But, still wrong.";
         private const string PLAY_AGAIN = "Do you want to play again? (Enter Y/N)";
 
+        private static int generateNumber(Random random)
+        {
+            return random.Next(1, 100);
+        }
         static void Main(string[] args)
         {
-            RandomNum rNum = new RandomNum();
+            Random rNum = new Random();
             int playerGuess;
             bool correctAnswer = false;
             int lives = 3;
@@ -26,7 +21,7 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
             Console.WriteLine("Welcome to \'The Number is Right\' game!");
             Console.WriteLine("------------------------------------");
             Thread.Sleep(1000);
-            int randomGeneratedNumber = rNum.generateNumber();
+            int randomGeneratedNumber = generateNumber(rNum);
 
             while (correctAnswer == false && lives > 0)
             {
