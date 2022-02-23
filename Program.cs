@@ -13,17 +13,13 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
         private const string THANKS_FOR_PLAYING_SPANISH = "Gracias para jugando, adios!";
         private const string SO_CLOSE = "You\'re so close!. But, still wrong.";
         private const string GAME_OVER = "Game over, no lives remaining - the correct answer was: ";
-        private const string PLAY_AGAIN = "Do you want to play again? (Enter Y/N)";
-
-        private static int generateNumber(Random random)
-        {
-            return random.Next(1, 100);
-        }
+        private const string PLAY_AGAIN = "Do you want to play again? (Enter Y/N)";        
         static void Main(string[] args)
         {
             Random rNum = new Random();
+            int randomGeneratedNumber = rNum.Next(1, 100);
             int playerGuess;
-            int lives = 3;
+            int lives = 2; // accounts for 3 lives because, zero-index
             bool correctAnswer = false;
             string response = "";
             
@@ -33,7 +29,6 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
 
             while (correctAnswer == false)
             {
-                int randomGeneratedNumber = generateNumber(rNum);
                 Console.Write(GUESS_TODAYS_NUMBER);
                 playerGuess = Convert.ToInt32(Console.ReadLine());
                 if (lives > 0)
@@ -56,10 +51,14 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                         Thread.Sleep(1000);
                         Console.WriteLine(PLAY_AGAIN);
                         response = Console.ReadLine();
-                        if (response == "N")
+                        if (response == "Y")
                         {
-                            Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
-                            correctAnswer = true;
+                            lives = 2;
+                            randomGeneratedNumber = rNum.Next(1, 100);
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
                 }
@@ -69,13 +68,19 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                     Thread.Sleep(1500);
                     Console.WriteLine(PLAY_AGAIN);
                     response = Console.ReadLine();
-                    if (response == "N")
+                    if (response == "Y")
                     {
-                        Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
-                        correctAnswer = true;
+                        lives = 2;
+                        randomGeneratedNumber = rNum.Next(1, 100);
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
             }
+            correctAnswer = true;
+            Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
         }
     }
 }
