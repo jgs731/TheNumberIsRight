@@ -31,40 +31,33 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
             {
                 Console.Write(GUESS_TODAYS_NUMBER);
                 playerGuess = Convert.ToInt32(Console.ReadLine());
-                if (playerGuess == randomGeneratedNumber)
-                {
-                    Console.WriteLine(CORRECT);
-                }
-                else
+                if (playerGuess != randomGeneratedNumber && lives > 0)
                 {
                     lives--;
-                    if (lives > 0)
+                    if ((randomGeneratedNumber - playerGuess) < Math.Abs(5.0))
                     {
-                        if (playerGuess - randomGeneratedNumber < Math.Abs(5.0))
-                        {
-                            Console.WriteLine(SO_CLOSE);
-                        }
-                        else
-                        {
-                            Console.WriteLine(INCORRECT);
-                        }
+                        Console.WriteLine(SO_CLOSE);
                     }
                     else
                     {
-                        Console.WriteLine(GAME_OVER + $"{randomGeneratedNumber}");
+                        Console.WriteLine(INCORRECT);
                     }
-                }
-                Thread.Sleep(1500);
-                Console.WriteLine(PLAY_AGAIN);
-                response = Console.ReadLine();
-                if (response == "Y")
-                {
-                    lives = 2;
-                    randomGeneratedNumber = rNum.Next(1, 100);
                 }
                 else
                 {
-                    break;
+                    Console.WriteLine(lives > 0 ? CORRECT : GAME_OVER + $"{randomGeneratedNumber}");
+                    Thread.Sleep(1500);
+                    Console.WriteLine(PLAY_AGAIN);
+                    response = Console.ReadLine();
+                    if (response == "Y")
+                    {
+                        lives = 2;
+                        randomGeneratedNumber = rNum.Next(1, 100);
+                    }
+                    else
+                    {
+                        correctAnswer = true;
+                    }
                 }
             }
             Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
