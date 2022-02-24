@@ -31,55 +31,42 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
             {
                 Console.Write(GUESS_TODAYS_NUMBER);
                 playerGuess = Convert.ToInt32(Console.ReadLine());
-                if (lives > 0)
+                if (playerGuess == randomGeneratedNumber)
                 {
-                    if (playerGuess != randomGeneratedNumber)
-                    {
-                        lives--;
-                        if (playerGuess - randomGeneratedNumber > Math.Abs(5.0))
-                        {
-                            Console.WriteLine(INCORRECT);
-                        }
-                        else
-                        {
-                            Console.WriteLine(SO_CLOSE);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine(CORRECT);
-                        Thread.Sleep(1000);
-                        Console.WriteLine(PLAY_AGAIN);
-                        response = Console.ReadLine();
-                        if (response == "Y")
-                        {
-                            lives = 2;
-                            randomGeneratedNumber = rNum.Next(1, 100);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                    Console.WriteLine(CORRECT);
                 }
                 else
                 {
-                    Console.WriteLine(GAME_OVER + $"{randomGeneratedNumber}");
-                    Thread.Sleep(1500);
-                    Console.WriteLine(PLAY_AGAIN);
-                    response = Console.ReadLine();
-                    if (response == "Y")
+                    lives--;
+                    if (lives > 0)
                     {
-                        lives = 2;
-                        randomGeneratedNumber = rNum.Next(1, 100);
+                        if (playerGuess - randomGeneratedNumber < Math.Abs(5.0))
+                        {
+                            Console.WriteLine(SO_CLOSE);
+                        }
+                        else
+                        {
+                            Console.WriteLine(INCORRECT);
+                        }
                     }
                     else
                     {
-                        break;
+                        Console.WriteLine(GAME_OVER + $"{randomGeneratedNumber}");
                     }
                 }
+                Thread.Sleep(1500);
+                Console.WriteLine(PLAY_AGAIN);
+                response = Console.ReadLine();
+                if (response == "Y")
+                {
+                    lives = 2;
+                    randomGeneratedNumber = rNum.Next(1, 100);
+                }
+                else
+                {
+                    break;
+                }
             }
-            correctAnswer = true;
             Console.WriteLine(THANKS_FOR_PLAYING_SPANISH);
         }
     }
