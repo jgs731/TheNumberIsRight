@@ -11,6 +11,8 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
         private const string CORRECT = "Well done, correct answer!";
         private const string INCORRECT = "Incorrect guess - you have lost a life";
         private const string THANKS_FOR_PLAYING_SPANISH = "Gracias para jugando, adios!";
+        private const String TOO_HIGH = "Guess too high - lost a life";
+        private const String TOO_LOW = "Guess too low - lost a life";
         private const string SO_CLOSE = "You\'re so close!. But, still wrong.";
         private const string GAME_OVER = "Game over, no lives remaining - the correct answer was: ";
         private const string PLAY_AGAIN = "Do you want to play again? (Enter Y/N)";        
@@ -34,13 +36,14 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                 if (playerGuess != randomGeneratedNumber && lives > 0)
                 {
                     lives--;
-                    if ((randomGeneratedNumber - playerGuess) < Math.Abs(5.0))
+                    int difference = randomGeneratedNumber - playerGuess;
+                    if (difference < Math.Abs(5.0))
                     {
                         Console.WriteLine(SO_CLOSE);
                     }
                     else
                     {
-                        Console.WriteLine(INCORRECT);
+                        Console.WriteLine(difference > 5.0 ? TOO_LOW: TOO_HIGH);
                     }
                 }
                 else
