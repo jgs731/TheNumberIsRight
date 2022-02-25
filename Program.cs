@@ -54,8 +54,8 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                     response = Console.ReadLine();
                     if (response == "Y")
                     {
-                        lives = 2;
-                        randomGeneratedNumber = rNum.Next(1, 100);
+                        lives = 2;                                      // Reset lives counter
+                        randomGeneratedNumber = rNum.Next(1, 100);      // Generate number for new game
                     }
                     else
                     {
