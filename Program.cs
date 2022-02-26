@@ -34,21 +34,22 @@ namespace TheNumberIsRight // Note: actual namespace depends on the project name
                 Console.Write(GUESS_TODAYS_NUMBER);
                 playerGuess = Convert.ToInt32(Console.ReadLine());
                 if (playerGuess != randomGeneratedNumber && lives > 0)
-                {
+                {   
                     lives--;
                     int difference = randomGeneratedNumber - playerGuess;
-                    if (difference < Math.Abs(5.0))
+                    if (difference > 0 && difference < Math.Abs(5))
                     {
                         Console.WriteLine(SO_CLOSE);
+                        Console.WriteLine((difference > 0) ? TOO_LOW : TOO_HIGH);
                     }
                     else
                     {
-                        Console.WriteLine(difference > 5.0 ? TOO_LOW: TOO_HIGH);
+                        Console.WriteLine(difference > 5 ? TOO_LOW : TOO_HIGH);
                     }
                 }
                 else
                 {
-                    Console.WriteLine(lives > 0 ? CORRECT : GAME_OVER + $"{randomGeneratedNumber}");
+                    Console.WriteLine(lives == 0 ? GAME_OVER + randomGeneratedNumber : CORRECT);
                     Thread.Sleep(1500);
                     Console.WriteLine(PLAY_AGAIN);
                     response = Console.ReadLine();
